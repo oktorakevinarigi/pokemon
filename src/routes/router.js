@@ -5,17 +5,21 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import App from './App/App'
+import LayoutHeader from './Layout/Header'
+import App from './App/App';
+import Detail from './Detail/Detail'
 
 const AppRoute = () => {
   return (
     <Router>
+      <LayoutHeader />
+      
       <Switch>
-        <Route path="/">
+        <Route path="/" exact>
           <App />
         </Route>
-        <Route path="/users">
-          <p>User</p>
+        <Route path="/detail/:id" exact>
+          <Detail />
         </Route>
       </Switch>
     </Router>

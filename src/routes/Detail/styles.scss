@@ -1,0 +1,32 @@
+
+.content2{
+  width: 80%;
+  display: flex;
+  padding: 20px 20px 20px 20px;
+}
+
+.desc{
+  width: 20%;
+}
+
+.boxImg{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.boxSidebar{
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarRight{
+    border-bottom: 1px solid #bfbfbf;
+    border-left: 1px solid #bfbfbf;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
