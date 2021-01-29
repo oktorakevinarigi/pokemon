@@ -1,10 +1,14 @@
+import {Link} from 'react-router-dom';
 import pokemon from '../../Global/Image/pokemon.png'
-import './styles.scss'
 
 const Header = () => {
   return (
     <header>
-      <img src={pokemon} alt="logo pokemon" />
+      <Link to="/"><img src={pokemon} alt="logo pokemon" /></Link>
+      <div>
+        <Link to="/">Home</Link>
+        <Link to="/">Take</Link>
+      </div>
     </header>
   )
 }

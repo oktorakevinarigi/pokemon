@@ -1,10 +1,8 @@
 import {useEffect, useCallback} from 'react'
 import {useDispatch, useSelector} from 'react-redux';
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 import * as actApp from './Redux/ac-App'
-
-import './styles.scss'
 
 const App = () => {
   let history = useHistory();
