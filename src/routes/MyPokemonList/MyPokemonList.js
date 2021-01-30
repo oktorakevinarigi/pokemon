@@ -33,7 +33,7 @@ const MyPokemonList = () => {
   }, [dispatch, list])
 
   return (
-    <div className="container">
+    <div className="container" style={{minHeight: '100vh'}}>
       <div className="detail-title-header">My Pokemon List</div>
       <main>
         <div className="content">

@@ -52,7 +52,7 @@ const App = () => {
       setIsVisible(prrev => !prrev)
     }
     
-  }, [dispatch, list])
+  }, [setIsVisible])
 
   const onCatch = useCallback(() => {
     let tempList = [...list]
@@ -64,7 +64,7 @@ const App = () => {
     setIsVisible(prrev => !prrev)
     setName('')
     openNotification('success')
-  }, [dispatch, list, name, setName])
+  }, [dispatch, list, name, id, setName])
 
   return (
     <div className="container">
@@ -86,15 +86,12 @@ const App = () => {
               <div className="detail-back">Back</div>
             </div>
             <div className="detail-title">{detail && detail.name.toUpperCase()}</div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
           </div>
           <div className="boxImg">
-            <img src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`} alt="Gambar pokemon" height="500" width="70%" />
+            <img src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`} alt="Gambar pokemon" height="500" width="400" />
             {
               resParam.get("show") === 'true' && 
-              <Button type="primary" size="large" onClick={onModal}>
-                Catch the Pokemon
-              </Button>
+              <Button type="primary" size="large" onClick={onModal}>Catch the Pokemon</Button>
             }
           </div>
         </div>
@@ -111,7 +108,7 @@ const App = () => {
         </div>
       </main>
       <div className="detail-title-header">Moves</div>
-      <div style={{display:'flex', flexWrap:'wrap'}}>
+      <div className="detail-content-move">
         {
           detail &&
           detail.moves.map((x, i) => ( 
@@ -121,7 +118,7 @@ const App = () => {
       </div>
 
       <div className="detail-title-header">Type</div>
-      <div style={{display:'flex', flexWrap:'wrap'}}>
+      <div className="detail-content-type">
         {
           detail &&
           detail.types.map((x, i) => ( 
