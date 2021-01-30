@@ -11,7 +11,7 @@ import MyPokemonList from './MyPokemonList/MyPokemonList'
 
 const AppRoute = () => {
   return (
-    <Router>
+    <Router basename="/pokemon">
       <LayoutHeader />
       
       <Switch>
