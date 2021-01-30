@@ -91,8 +91,14 @@ main{
 
 .boxImg{
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   width: 75%;
+  align-items: center;
+
+  button{
+    width: 200px;
+    margin-top: 20px;
+  }
 }
 
 .boxSidebar{
@@ -115,7 +121,7 @@ main{
   text-align: center;
   font-size: 30px;
   font-weight: bold;
-  margin: 15px 0;
+  padding: 15px 0;
 }
 
 .detail-box-moves{
@@ -127,4 +133,32 @@ main{
   justify-content: center;
   align-items: center;
   border-radius: 5px;
+}
+
+.my-pokemon-card{
+  min-width: 250px;
+  max-width: 300px;
+  border: 1px solid #bfbfbf;
+  border-radius: 10px;
+  flex: 1;
+  margin: 15px 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  div{
+    height: 250px;
+    justify-content: center;
+    display: flex;
+
+    img{
+      margin: 10px;
+    }
+  }
+
+  p{
+    font-weight: bold;
+    text-align: center;
+  }
 }

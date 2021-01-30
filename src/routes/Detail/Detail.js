@@ -1,16 +1,24 @@
-import {useEffect, useCallback} from 'react'
+import {useEffect, useCallback, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux';
-import {useParams, useHistory} from "react-router-dom";
+import {useParams, useHistory, useLocation} from "react-router-dom";
 import {ArrowLeftOutlined} from '@ant-design/icons';
+import {Button, Modal, Input, notification, Alert} from 'antd';
 
 import * as actDetail from './Redux/ac-Detail'
+import * as actMyPokemon from '../MyPokemonList/Redux/ac-MyPokemonList'
 
 const App = () => {
-  let history = useHistory();
+  const history = useHistory();
+  const {search} = useLocation();
   const dispatch = useDispatch();
-  let { id } = useParams();
+  const {id} = useParams();
+  const [isVisible, setIsVisible] = useState(false);
+  const [name, setName] = useState('');
   const detail = useSelector(state => state.Detail.detail);
+  const list = useSelector(state => state.MyPokemonList.list);
 
+  const resParam = new URLSearchParams(search);
+  
   useEffect(() => {
     dispatch(actDetail.fetchGetDetail(id))
   }, [dispatch, id])
@@ -19,8 +27,57 @@ const App = () => {
     history.goBack()
   }, [history])
 
+  const openNotification = (type) => {
+    const description = (
+      <Alert 
+        message={type === 'success' ? 'Pokemon Caught' : 'Please try again to catch'} 
+        type={type} showIcon 
+      />
+    );
+    notification.open({
+      key: 'updatable',
+      message: type.toUpperCase(),
+      description,
+    });
+  };
+
+  const onModal = useCallback((type) => {
+    if(type !== 'cancel'){
+      if(Math.random() < 0.5){
+        setIsVisible(prrev => !prrev)
+      }else{
+        openNotification('warning')
+      }
+    }else{
+      setIsVisible(prrev => !prrev)
+    }
+    
+  }, [dispatch, list])
+
+  const onCatch = useCallback(() => {
+    let tempList = [...list]
+    tempList.push({
+      id,
+      name
+    })
+    dispatch(actMyPokemon.handleState('list',tempList))
+    setIsVisible(prrev => !prrev)
+    setName('')
+    openNotification('success')
+  }, [dispatch, list, name, setName])
+
   return (
     <div className="container">
+      <Modal 
+        title="Give the Pokemon a nickname" 
+        visible={isVisible} 
+        onOk={onCatch} 
+        onCancel={() => onModal('cancel')}
+        okButtonProps={{ disabled: name ? false : true }}
+      >
+        <Input value={name} onChange={(e) => setName(e.target.value)} />
+      </Modal>
+
       <main>
         <div className="detail-content">
           <div className="desc">
@@ -32,7 +89,13 @@ const App = () => {
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
           </div>
           <div className="boxImg">
-            <img src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`} alt="Gambar pokemon" height="500" />
+            <img src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`} alt="Gambar pokemon" height="500" width="70%" />
+            {
+              resParam.get("show") === 'true' && 
+              <Button type="primary" size="large" onClick={onModal}>
+                Catch the Pokemon
+              </Button>
+            }
           </div>
         </div>
         <div className="boxSidebar">

@@ -14,7 +14,7 @@ const App = () => {
   }, [dispatch])
 
   const onDetail = useCallback((id) => {
-    history.push(`/detail/${id}`)
+    history.push(`/detail/${id}?show=true`)
   }, [history])
 
   return (

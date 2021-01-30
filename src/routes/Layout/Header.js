@@ -7,7 +7,7 @@ const Header = () => {
       <Link to="/"><img src={pokemon} alt="logo pokemon" /></Link>
       <div>
         <Link to="/">Home</Link>
-        <Link to="/">Take</Link>
+        <Link to="/myPokemontList">My Pokemon List</Link>
       </div>
     </header>
   )

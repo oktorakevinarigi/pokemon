@@ -7,6 +7,7 @@ import {
 import LayoutHeader from './Layout/Header'
 import App from './App/App';
 import Detail from './Detail/Detail'
+import MyPokemonList from './MyPokemonList/MyPokemonList'
 
 const AppRoute = () => {
   return (
@@ -17,8 +18,11 @@ const AppRoute = () => {
         <Route path="/" exact>
           <App />
         </Route>
-        <Route path="/detail/:id" exact>
+        <Route path="/detail/:id">
           <Detail />
+        </Route>
+        <Route path="/myPokemontList" exact>
+          <MyPokemonList />
         </Route>
       </Switch>
     </Router>

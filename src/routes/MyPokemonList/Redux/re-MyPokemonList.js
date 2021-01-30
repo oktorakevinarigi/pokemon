@@ -1,22 +1,22 @@
 import * as types from "./types";
   
 const initState = {
-  detail: null,
+  list: [],
 };
   
 const App = (state = initState, action) => {
   switch (action.type) {
-    case types.DETAIL_HANDLE_STATE: {
+    case types.MY_LIST_HANDLE_STATE: {
       return {
         ...state,
         [action.field]: action.value,
       };
     }
-    case types.DETAIL_HANDLE_STATE_GLOBAL: {
-        return {
-            ...state,
-            ...action.data
-          };
+    case types.MY_LIST_HANDLE_STATE_GLOBAL: {
+      return {
+        ...state,
+        ...action.data
+      };
     }
     default:
       return state;
